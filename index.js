@@ -194,7 +194,26 @@ function getCargoCapacityTotal(character) {
  * Sample data expected output: `X-wing`
 */
 function getFastestStarshipName(character) {
-  // TODO: Add your code here.
+  let ships = [{ 
+    name: "", 
+    speed: 0
+  }]
+  character.starships.forEach((ship) => { 
+     let speed = parseInt(ship.max_atmosphering_speed)
+      ships.push({
+        name: ship.name,
+        speed: speed
+      })
+})
+let fastest = ships.reduce((total, current) => { 
+  return (total.speed > current.speed) ? total : current
+})
+
+if (fastest.name.length > 0) { 
+  return fastest.name
+} else { 
+  return "none"
+}
 }
 
 /**
