@@ -159,7 +159,27 @@ function getNthFilm(character, filmNumber) {
  * Sample data expected output: 80124
 */
 function getCargoCapacityTotal(character) {
-  
+  let vehicleCapacity = 0 
+  let starshipCapacity = 0 
+
+  character.vehicles.forEach((vehicle) => { 
+    if(vehicle.cargo_capacity === null) { 
+      vehicle.cargo_capacity = 0
+    }
+    let vehicleNum = parseInt(vehicle.cargo_capacity)
+    vehicleCapacity += vehicleNum
+  })
+  character.starships.forEach((ship) => { 
+    if(ship.cargo_capacity === null) { 
+      ship.cargo_capacity = 0
+    }
+    let shipNum = parseInt(ship.cargo_capacity)
+    starshipCapacity += shipNum
+  })
+
+  let total = vehicleCapacity + starshipCapacity
+
+  return total 
 }
 
 /**
