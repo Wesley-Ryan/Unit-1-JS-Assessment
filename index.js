@@ -29,7 +29,10 @@ function getName(character) {
  * Sample data expected output: 5
  */
 function getFilmCount(character) {
-  // TODO: Add your code inside the functions (others below).
+  let films = 0 
+   films += character.films.length
+
+  return films
 
 }
 
@@ -42,7 +45,13 @@ function getFilmCount(character) {
  * If length is 0. Return 'none'
 */
 function getSecondStarshipName(character) {
-  // TODO: Add your code here.
+  if (character.starships.length === 0) { 
+    return 'none'
+  } else { 
+    return character.starships[1].name
+  }
+  
+
 }
 
 /**
@@ -55,8 +64,13 @@ function getSecondStarshipName(character) {
  *    Result: `Luke Skywalker, 172cm, 77kg. Featured in 5 films.`
  */
 function getSummary(character) {
-  // TODO: Add your code here.
+
+  let filmCount = character.films.length
+
+  return `${character.name}, ${character.height}cm, ${character.mass}kg. Featured in ${filmCount} films.`
 }
+
+
 
 /**
  * ### Challenge `getVehiclesCostInCreditsSumTotal`
@@ -67,7 +81,16 @@ function getSummary(character) {
  * Sample data expected output: 8000
 */
 function getVehiclesCostInCreditsSumTotal(character) {
-  // TODO: Add your code here.
+  let total = 0
+  character.vehicles.forEach((ship) => { 
+    if (ship.cost_in_credits === null) { 
+      ship.cost_in_credits = 0 
+    } else { 
+      total += ship.cost_in_credits
+    }
+  })
+
+  return total
 }
 
 /**
@@ -81,7 +104,17 @@ function getVehiclesCostInCreditsSumTotal(character) {
  * Sample data expected output: 27
 */
 function getStarshipPassengerAndCrewSumTotal(character) {
-  // TODO: Add your code here.
+  let crew = 0
+  let passengers = 0
+    character.starships.forEach((starship) => {
+      crew += starship.crew
+      passengers += starship.passengers
+      
+    });
+    let total = crew + passengers
+    
+    return total
+
 }
 
 /**
@@ -98,7 +131,21 @@ function getStarshipPassengerAndCrewSumTotal(character) {
  * Given film #7, expected error: `There are only 3 Star Wars movies. Flan fiction excluded.`
 */
 function getNthFilm(character, filmNumber) {
-  // TODO: Add your code here.
+  let ogFilms = ["zero"]
+
+  let saying = ""
+
+  character.films.forEach((film) => { 
+    ogFilms.push(film)
+  })
+
+  if (filmNumber > 3) { 
+    saying = `There are only 3 Star Wars movies`
+  } else { 
+    saying = `${ogFilms[filmNumber]}`
+  }
+
+  return saying
 }
 
 /**
@@ -112,7 +159,27 @@ function getNthFilm(character, filmNumber) {
  * Sample data expected output: 80124
 */
 function getCargoCapacityTotal(character) {
-  // TODO: Add your code here.
+  let vehicleCapacity = 0 
+  let starshipCapacity = 0 
+
+  character.vehicles.forEach((vehicle) => { 
+    if(vehicle.cargo_capacity === null) { 
+      vehicle.cargo_capacity = 0
+    }
+    let vehicleNum = parseInt(vehicle.cargo_capacity)
+    vehicleCapacity += vehicleNum
+  })
+  character.starships.forEach((ship) => { 
+    if(ship.cargo_capacity === null) { 
+      ship.cargo_capacity = 0
+    }
+    let shipNum = parseInt(ship.cargo_capacity)
+    starshipCapacity += shipNum
+  })
+
+  let total = vehicleCapacity + starshipCapacity
+
+  return total 
 }
 
 /**
@@ -127,7 +194,26 @@ function getCargoCapacityTotal(character) {
  * Sample data expected output: `X-wing`
 */
 function getFastestStarshipName(character) {
-  // TODO: Add your code here.
+  let ships = [{ 
+    name: "", 
+    speed: 0
+  }]
+  character.starships.forEach((ship) => { 
+     let speed = parseInt(ship.max_atmosphering_speed)
+      ships.push({
+        name: ship.name,
+        speed: speed
+      })
+})
+let fastest = ships.reduce((total, current) => { 
+  return (total.speed > current.speed) ? total : current
+})
+
+if (fastest.name.length > 0) { 
+  return fastest.name
+} else { 
+  return "none"
+}
 }
 
 /**
