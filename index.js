@@ -81,7 +81,16 @@ function getSummary(character) {
  * Sample data expected output: 8000
 */
 function getVehiclesCostInCreditsSumTotal(character) {
-  // TODO: Add your code here.
+  let total = 0
+  character.vehicles.forEach((ship) => { 
+    if (ship.cost_in_credits === null) { 
+      ship.cost_in_credits = 0 
+    } else { 
+      total += ship.cost_in_credits
+    }
+  })
+
+  return total
 }
 
 /**
@@ -95,7 +104,17 @@ function getVehiclesCostInCreditsSumTotal(character) {
  * Sample data expected output: 27
 */
 function getStarshipPassengerAndCrewSumTotal(character) {
-  // TODO: Add your code here.
+  let crew = 0
+  let passengers = 0
+    character.starships.forEach((starship) => {
+      crew += starship.crew
+      passengers += starship.passengers
+      
+    });
+    let total = crew + passengers
+    
+    return total
+
 }
 
 /**
