@@ -45,13 +45,13 @@ function getFilmCount(character) {
  * If length is 0. Return 'none'
 */
 function getSecondStarshipName(character) {
-  if (character.starships[0].name.length === 0 ) { 
-    return "none"
+  if (character.starships.length === 0) { 
+    return 'none'
   } else { 
-    console.log(character.starships[1].name)
-
     return character.starships[1].name
   }
+  
+
 }
 
 /**
@@ -131,7 +131,21 @@ function getStarshipPassengerAndCrewSumTotal(character) {
  * Given film #7, expected error: `There are only 3 Star Wars movies. Flan fiction excluded.`
 */
 function getNthFilm(character, filmNumber) {
-  // TODO: Add your code here.
+  let ogFilms = ["zero"]
+
+  let saying = ""
+
+  character.films.forEach((film) => { 
+    ogFilms.push(film)
+  })
+
+  if (filmNumber > 3) { 
+    saying = `There are only 3 Star Wars movies`
+  } else { 
+    saying = `${ogFilms[filmNumber]}`
+  }
+
+  return saying
 }
 
 /**
@@ -145,7 +159,7 @@ function getNthFilm(character, filmNumber) {
  * Sample data expected output: 80124
 */
 function getCargoCapacityTotal(character) {
-  // TODO: Add your code here.
+  
 }
 
 /**
